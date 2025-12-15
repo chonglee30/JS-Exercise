@@ -4,21 +4,26 @@
 // YouTube Reference: https://www.youtube.com/watch?v=tcFx0t3p6as
 
 let nums = [1,2,1]
-var getConcatenation = function(nums) {
+// 1. Using array concat function method 
+const getConcatenation = function(nums) {
   let sumNums = nums.concat(nums);
   return sumNums;
 };
-console.log(getConcatenation(nums));
+console.log('1. Using array concat')
+console.log(getConcatenation(nums));  // [ 1, 2, 1, 1, 2, 1 ]
 
+// 2. Concatenation using the Spread Operator ( ... )
 const getArrayConcatenate = function(nums) {
   return [... nums, ... nums];
 };
+console.log('2. Using the Spread Operator')
 console.log(getArrayConcatenate(nums));
 
 // JS References - Array Clone References: https://www.youtube.com/watch?v=nzXc00nhbrs
 // // Spread Operator - 1. Array Version
 let numbers = [-4, -2, 0];
 let clone = [...numbers]
+console.log('3. Clone')
 console.log(clone);
 // numbers[1]=-1;
 // console.log(numbers);

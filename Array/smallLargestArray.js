@@ -29,4 +29,22 @@ const big = sortedArray[sortedArray.length-1];
 return {smallest, big}
 }
 
+function findSmallestLargest(randomArray) {
+    let smallest = Number.MAX_VALUE 
+    let largest =Number.MIN_VALUE
+
+    for (let num of randomArray) {
+        if (num>largest) {
+            largest = num;
+        }
+        if (num<smallest) {
+            smallest = num
+        }
+    }
+    console.log(smallest)
+    console.log(largest)  
+}
+
+
 console.log(findSmallBig(numbers));
+findSmallestLargest(numbers)
