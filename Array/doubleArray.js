@@ -51,6 +51,7 @@ console.log(openOrSeniorV1(data2))
 // handing one single result (either 'Senior' or 'Open') back to the .map() machine
 // 2. .map() method is used for transformation.
 // go through every item in data, apply a rule, and give you back a new array of the exact same length
+// turning an array of numbers into an array of strings (names of categories)
 function openOrSeniorShort(data) {
     return data.map(([age, handicap]) => (age>=55 && handicap > 7) ? 'Senior': 'Open');
 }
@@ -58,3 +59,16 @@ function openOrSeniorShort(data) {
 console.log('Short Version')
 console.log(openOrSeniorShort(data1))
 console.log(openOrSeniorShort(data2))
+
+// Higher Order Function - using helper function
+// example of Functional Iteration (looping) using a Helper Function
+function openOrSeniorV2(data) {
+    function determineCategorization(member) {
+        return (member[0] >= 55 && member[1] >7) ? 'Senior': 'Open'
+    }
+    return data.map(determineCategorization)
+}
+
+console.log('Higher Order Function - helper function Version')
+console.log(openOrSeniorV2(data1))
+console.log(openOrSeniorV2(data2))
