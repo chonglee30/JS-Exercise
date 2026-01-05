@@ -1,4 +1,4 @@
-// Categorize New Member
+// Question1: Categorize New Member
 
 // My Solution:
 function openOrSenior(data){
@@ -72,3 +72,19 @@ function openOrSeniorV2(data) {
 console.log('Higher Order Function - helper function Version')
 console.log(openOrSeniorV2(data1))
 console.log(openOrSeniorV2(data2))
+
+// Question2: The VIP Guest List
+// The Goal: You have a list of guests. 
+// You only want to keep the guests who are on the "VIP" list and are at least 21 years old.
+// (Format: [Name, Age, isVip])
+
+// Filter return only meeting condition
+// map will return only T/F value
+function vipGuestLists(data) {
+    return data.filter(([Name, Age, isVip]) => {
+        return (Age >=21 && isVip)
+    })
+}
+
+const guests1 = [["Alice", 25, true], ["Bob", 19, true], ["Charlie", 30, false]];
+console.log(vipGuestLists(guests1))
