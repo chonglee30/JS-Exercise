@@ -28,5 +28,23 @@ function enhancedFizzBuzz(number) {
     }
 }
 
-enhancedFizzBuzz(100)
+//enhancedFizzBuzz(100)
 //Fizz Buzz Efficient Coding Reverence: https://www.youtube.com/watch?v=ObWSm4GPyCI
+
+
+function returnFizzBuzzResult(num) {
+    let result=''
+    if (num%3===0) result+='Fizz'
+    if (num%5===0) result+='Buzz'
+    //if ((i%3!==0)&&(i%5!==0)) result+=i
+    //console.log(result)
+    //console.log(result||i)
+    return (result||num)
+}
+
+console.log(returnFizzBuzzResult(3))
+console.log(returnFizzBuzzResult(5))
+console.log(returnFizzBuzzResult(15))
+console.log(returnFizzBuzzResult(17))
+
+
