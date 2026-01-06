@@ -88,3 +88,40 @@ function vipGuestLists(data) {
 
 const guests1 = [["Alice", 25, true], ["Bob", 19, true], ["Charlie", 30, false]];
 console.log(vipGuestLists(guests1))
+// try to return name
+
+// Question3: The Grocery Bill
+// a list of items and their prices.
+//  You need to calculate the total cost of the basket.
+
+const basket = [["Apples", 2.50], ["Milk", 3.00], ["Bread", 2.00]];
+
+function totalGroceryCost(data) {
+    return data.reduce((total, [item, price]) => {
+        return total + price
+    }, 0)
+}
+
+console.log('----- Total Grocery Cost -----')
+console.log(totalGroceryCost(basket))
+
+// Question4: The Email Formatter
+// Given: a list of usernames.
+// turn them into valid email addresses for the company "company.com" and make them all lowercase
+function emailAddress(data) {
+    return data.map((username)=> { 
+       let user = username.toLowerCase() 
+        return user.concat('@company.com')
+    })  
+}
+
+
+console.log('Email Address Construction')
+const employees = ["JohnDoe", "ALICE_SMITH", "Bob_Builder"];
+console.log(emailAddress(employees))
+
+function emailAddressShortV(data) {
+   return data.map((username) => `${username.toLowerCase()}@company.com`)
+}
+
+console.log(emailAddressShortV(employees))
