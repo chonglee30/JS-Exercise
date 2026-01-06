@@ -88,7 +88,25 @@ function vipGuestLists(data) {
 
 const guests1 = [["Alice", 25, true], ["Bob", 19, true], ["Charlie", 30, false]];
 console.log(vipGuestLists(guests1))
-// try to return name
+// Return name only
+function vipGuestLists(data) {  
+    const fullVIPList =
+        data.filter(([Name, Age, isVip]) => {
+            return (Age >=21 && isVip)
+        })  
+    return fullVIPList.map(([Name, Age, isVip]) => Name)
+}
+
+console.log('VIP Guest Info')
+console.log(vipGuestLists(guests1))
+
+function vipGuestNames(data) {
+    return data.filter(([Name, Age, isVip]) => (Age >=21 && isVip))
+               .map(([Name]) => Name)
+}
+
+console.log('VIP Guest Name only')
+console.log(vipGuestNames(guests1))
 
 // Question3: The Grocery Bill
 // a list of items and their prices.
