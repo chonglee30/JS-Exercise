@@ -81,10 +81,49 @@ Create a function that takes the Inventory from Challenge 6, filters for the res
 
 function stockAlertWarning(productLists) {
     return productLists.filter(([ItemName, Quantity, isDiscontinued])=> (Quantity <5 && !isDiscontinued))
-                       .map(([ItemName, Quantity, isDiscontinued]) => {return `URGENT: ${ItemName} needs restocking (Only ${Quantity} left).`})
+                       .map(([ItemName, Quantity, isDiscontinued]) => `URGENT: ${ItemName} needs restocking (Only ${Quantity} left).`)
 }
 
 const products1 = [ ["Pens", 10, false], ["Paper", 2, false], ["Ink", 0, true], ["Organizer", 1, false] ]
-
 console.log(stockAlertWarning(products))
 console.log(stockAlertWarning(products1))
+
+// Object Destructing:
+// The Challenge: The Playwright Test Reporter
+// The Goal: You are building a custom reporter. You have an array of test result objects. 
+// You need to find all tests that failed, 
+// then return a list of error messages that include the test title and how long it took.
+
+// Object Destructuring
+// The big difference is that with objects, the order doesn't matter, but the names must match the keys in the object.
+
+const testResults = [
+    { title: "Login Page", status: "passed", duration: 120, error: null },
+    { title: "Checkout Flow", status: "failed", duration: 450, error: "Timeout after 5000ms" },
+    { title: "API Integration", status: "passed", duration: 80, error: null },
+    { title: "Search Bar", status: "failed", duration: 200, error: "Element not found" }
+  ];
+
+function generateTestResults(results) {
+    const tempResults =
+    results.filter(({title, status, duration, error}) =>{
+        if (status ==='failed') {
+            return ({title, duration, error})
+        }
+    })
+    
+    return tempResults.map(({title, duration, error}) => {
+        return `Error Message: ${error} with ${title} and took ${duration}ms`
+    })
+}
+
+console.log(generateTestResults(testResults))
+
+function generateTestResultsShort(results) {
+    return results.filter(({status}) => status === 'failed')
+           .map(({title, duration, error}) => { 
+            return `Test ${title} failed with ${error} message and took ${duration}ms`
+        })            
+}
+
+console.log(generateTestResultsShort(testResults))
