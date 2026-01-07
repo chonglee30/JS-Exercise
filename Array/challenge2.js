@@ -132,6 +132,7 @@ console.log(generateTestResultsShort(testResults))
 Hint: You would change the .filter() to find slow passing tests, and change the .map() to say "⚠️ Warning: [Title] was slow."
 */
 
+// Version 1: Make it work using if/else
 function generateTestResultsFailWarning(results) {
     return results.filter(({status, duration}) => (status === 'failed') || (status ==='passed' && duration >100)) 
                   .map(({title, status, duration, error}) => {
@@ -143,5 +144,47 @@ function generateTestResultsFailWarning(results) {
                   })  
 }
 
-
 console.log(generateTestResultsFailWarning(testResults))
+
+// Version2: Short Code using Ternary
+function generateTestResultsFailWarningTernary(results) {
+    return results.filter(({status, duration}) => (status === 'failed') || (status ==='passed' && duration >100)) 
+                  .map(({title, status, duration, error}) => 
+                    status === "failed" 
+                    ? `Test ${title} failed with ${error} message and took ${duration}ms`     
+                    : `Warning: ${title} was slow and took ${duration}ms`
+                  )  
+}
+
+console.log(generateTestResultsFailWarningTernary(testResults))
+
+// Version3: Efficient Way: with only 1 loop instead of 2 loops 
+// starts as an empty array [] (defined by the second argument at the very bottom).
+function generateTestResultsFailWarningReduce(results) {
+    return results.reduce((accumulator, {title, status, duration, error}) => {
+        if (status === "failed") {
+            accumulator.push(`Test ${title} failed with ${error} message and took ${duration}ms`);
+        } else if (status ==='passed' && duration >100) {
+            accumulator.push(`Warning: ${title} was slow and took ${duration}ms`)
+        }
+        return accumulator // *** must ALWAYS return the bucket for the next step!
+    }, []);
+}
+console.log(generateTestResultsFailWarningReduce(testResults))
+
+// Version4: Functional Programming Approach:
+// Inefficient as create new array each loop and add to the list and destroy old array
+function generateTestResultsFailWarningSpread(results) {
+    return results.reduce((accumulator, {title, status, duration, error}) => {
+        if (status === "failed") {
+            return [...accumulator, `Test ${title} failed with ${error} message and took ${duration}ms`]
+        } else if (status ==='passed' && duration >100) {
+            return [...accumulator, `Warning: ${title} was slow and took ${duration}ms` ]
+        }
+        
+        // if neither condition, return original unchanged bucket
+        return accumulator  // without this, will get  accumulator is not iterable
+    }, []);       
+}
+
+console.log(generateTestResultsFailWarningSpread(testResults))
