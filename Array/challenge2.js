@@ -127,3 +127,21 @@ function generateTestResultsShort(results) {
 }
 
 console.log(generateTestResultsShort(testResults))
+
+/*Modify the code above to also include a "Warning" if a test passed but took longer than 100ms.
+Hint: You would change the .filter() to find slow passing tests, and change the .map() to say "⚠️ Warning: [Title] was slow."
+*/
+
+function generateTestResultsFailWarning(results) {
+    return results.filter(({status, duration}) => (status === 'failed') || (status ==='passed' && duration >100)) 
+                  .map(({title, status, duration, error}) => {
+                       if (status === "failed") {
+                        return `Test ${title} failed with ${error} message and took ${duration}ms` 
+                       } else if (status === "passed") {
+                         return `Warning: ${title} was slow and took ${duration}ms`
+                       }
+                  })  
+}
+
+
+console.log(generateTestResultsFailWarning(testResults))
