@@ -140,3 +140,65 @@ const newObject = {
 console.log(compKey)
 console.log(compValue)
 console.log(newObject); // Output: { a: 3 }
+
+// Most frequently used words in a text
+// https://www.codewars.com/kata/51e056fe544cf36c410000fb/javascript
+// https://www.codewars.com/kata/51e056fe544cf36c410000fb/solutions/javascript
+// Write a function that, given a string of text (possibly with punctuation and line-breaks), 
+// returns an array of the top-3 most occurring words, in descending order of the number of occurrences.
+
+function topThreeWords(text) {
+  
+  let keysArray = new Array();
+
+  // Return Empty Array if empty text
+  if (text.length ===0) return keysArray;
+
+  const newText = text.toLowerCase().replace(/[^a-z']+/g, ' ').trim()
+  
+  if (newText.length ===0) return keysArray;
+
+  // Split by one or more whitespace characters
+  const words = newText.split(/\s+/).filter((word) => /[a-z]/.test(word))
+  if (words.length ===0) return [];
+  //console.log("Words: ")
+  //console.log(words)
+
+  const wordsMap = new Map();
+  words.forEach((word) => {
+    if (wordsMap.has(word)) {
+      wordsMap.set(word, wordsMap.get(word)+1)
+    } else {
+      wordsMap.set(word, 1)
+    }
+  })
+
+  const wordsArray = [...wordsMap]
+  wordsArray.sort((a,b) => b[1] -a[1]);
+  const sortedMapDescending = new Map(wordsArray)
+  const mapSize = sortedMapDescending.size
+
+  console.log(sortedMapDescending)
+
+  if (mapSize>=3) {
+    keysArray = [ ...sortedMapDescending.keys()].slice(0,3)
+  } else {
+    keysArray = [ ...sortedMapDescending.keys()].slice(0,mapSize)
+  }
+
+  return keysArray
+}
+
+// Ex2:
+const text1 = "e e e e DDD ddd DdD: ddd ddd aa aA Aa, bb cc cC e e e"
+//--> ["e", "ddd", "aa"]
+//console.log(topThreeWords(text1)) 
+
+const text2 = "  //wont won't won't"
+console.log(topThreeWords(text2)) 
+
+const text3 = "  ...  "
+console.log(topThreeWords(text3)) 
+
+const text4 ="  '  "
+console.log(topThreeWords(text4)) 

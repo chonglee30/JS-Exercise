@@ -49,7 +49,26 @@ function reverseWords(words) {
 
  console.log(reversedArray)
  const reversedWords = reversedArray.join(' ') // 4. convert array of string into sentence of string
- return reverseWords
+ return reversedWords
 }
 
 console.log(reverseWords("Hello Canucks Fans!"))
+
+// Leetcode #151. Reverse Words in a String
+// https://leetcode.com/problems/reverse-words-in-a-string/submissions/1906273620/
+// The sky is blue => blue is sky The
+function reverseWordsOrder(words) {
+  // Use /\s+/ to catch all spaces at once
+  // \s: Matches any whitespace (space, tab, newline).
+  // +: Matches one or more of them in a row.
+  let wordsArray = words.trim().split(/\s+/)
+  let reversedWord = [];
+
+  for (let i= wordsArray.length-1; i>=0; i--) {
+    reversedWord.push(wordsArray[i])
+  }
+  return reversedWord.join(' ')
+}
+
+const sentence1 = "The sky is blue!"
+console.log(reverseWordsOrder(sentence1))
